@@ -16,3 +16,27 @@ class Livro:
 
         if self.quantidade_disponivel > self.quantidade_total:
             raise ValueError("Quantidade disponível não pode ser maior que o total")
+        
+    @classmethod
+    def cadastrar_livro(cls):
+        titulo = input("Digite o título: ")
+        autor = input("Digite o autor: ")
+
+        while True:
+            try:
+                quantidade_total = int(input("Digite a quantidade total: "))
+                quantidade_disponivel = int(input("Digite a quantidade disponível: "))
+
+                return cls(
+                    titulo=titulo,
+                    autor=autor,
+                    quantidade_total=quantidade_total,
+                    quantidade_disponivel=quantidade_disponivel
+                )
+
+            except ValueError as erro:
+                print(f"Erro: {erro}")
+                print("Digite valores válidos.")
+    
+livro1 = Livro.cadastrar_livro()
+print(livro1)
