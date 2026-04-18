@@ -9,7 +9,7 @@ class Funcionario(Pessoa):
     data_admissao: date
 
     def __post_init__(self):
-        super().__post_init__()  # chama validação da Pessoa
+        super().__post_init__()  
 
         if self.salario < 0:
             raise ValueError("Salário não pode ser negativo")
