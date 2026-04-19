@@ -1,0 +1,3 @@
+usuarios = []
+livros = []
+emprestimos = []
