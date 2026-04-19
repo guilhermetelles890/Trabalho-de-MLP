@@ -144,5 +144,24 @@ def menu():
                 pessoas.append(pessoa)
                 print("Pessoa cadastrada!")
 
+            case "2":
+                usuario = cadastrar_usuario()
+                usuarios.append(usuario)
+                print("Usuário cadastrado!")
+
+            case "3":
+                funcionario = cadastrar_funcionario()
+                funcionarios.append(funcionario)
+                print("Funcionário cadastrado!")
+
+            case "4":
+                livro = cadastrar_livro()
+                livros.append(livro)
+                print("Livro cadastrado!")
+
             case "0":
+                print("Saindo do sistema...")
                 break
+            
+            case _:
+                print("Opção inválida! Tente novamente.")
