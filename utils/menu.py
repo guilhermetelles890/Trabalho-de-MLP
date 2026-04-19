@@ -126,6 +126,7 @@ def menu():
     usuarios = []
     funcionarios = []
     livros = []
+    Emprestimos = []
 
     while True:
         print("\n================== Menu ==================")
@@ -143,6 +144,7 @@ def menu():
                 print("2 - Cadastrar Usuário")
                 print("3 - Cadastrar Funcionário")
                 print("4 - Cadastrar Livro")
+                print("5 - Cadastrar Empréstimo")
                 print("0 - Sair")
         
                 opcao2 = input("Escolha uma opção: ")
@@ -221,6 +223,48 @@ def menu():
                             os.system("pause")
                             os.system("cls")     
 
+                    case "5":
+                        if not usuarios:    
+                            print("Nenhum usuário cadastrado. Cadastre um usuário primeiro.")
+                            os.system("pause")
+                            os.system("cls")
+                            continue  
+
+                        if not livros:    
+                            print("Nenhum livro cadastrado. Cadastre um livro primeiro.")
+                            os.system("pause")
+                            os.system("cls")
+                            continue
+
+                        print("Usuários disponíveis:")
+                        for i, usuario in enumerate(usuarios):
+                            print(f"{i + 1} - {usuario.nome} (CPF: {usuario.cpf})")     
+                        usuario_index = int(input("Escolha um usuário pelo número: ")) - 1
+                        if usuario_index < 0 or usuario_index >= len(usuarios):
+                            print("Opção inválida. Tente novamente.")
+                            os.system("pause")
+                            os.system("cls")
+                            continue
+
+                        usuario_selecionado = usuarios[usuario_index]
+                        print("Livros disponíveis:")
+                        for i, livro in enumerate(livros):
+                            print(f"{i + 1} - {livro.titulo} (Autor: {livro.autor})")
+                        livro_index = int(input("Escolha um livro pelo número: ")) - 1
+                        if livro_index < 0 or livro_index >= len(livros):
+                            print("Opção inválida. Tente novamente.")
+                            os.system("pause")
+                            os.system("cls")
+                            continue
+                        
+                        livro_selecionado = livros[livro_index]
+                        novo_emprestimo = cadastrar_emprestimo(usuario_selecionado, livro_selecionado)
+                        Emprestimos.append(novo_emprestimo)
+                        print("Empréstimo cadastrado!")
+                        os.system("pause")
+                        os.system("cls")    
+
+                    
                     case "0":
                         print("Saindo de Cadastros...")
                         os.system("pause")

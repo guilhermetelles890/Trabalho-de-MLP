@@ -23,7 +23,13 @@ O sistema possui as seguintes funcionalidades:
 Tecnologias utilizadas
 - Python  
 - GitHub  
-- Visual Studio Code  
+- Visual Studio Code
+
+Extensões utilizadas no Visual Studio Code:
+-  Python
+- Python Debugger
+- Pylance
+- Python environments
 
 A pasta `data/` é utilizada para armazenar os dados do sistema, simulando um banco de dados.
 
@@ -32,11 +38,9 @@ Como executar
 1. Acesse o repositório no GitHub:  
    https://github.com/guilhermetelles890/Trabalho-de-MLP  
 
-2. Faça o download ou clone do projeto  
+2. Faça o download ou clone do projeto   
 
-3. Abra a pasta do projeto no Visual Studio Code  
-
-4. Execute o arquivo principal:
+3. Execute o arquivo principal:
    ```bash
    python main.py
 
