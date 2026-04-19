@@ -16,7 +16,7 @@ class Pessoa:
         while True:
             try:
                 cpf = input("Digite o CPF: ")
-                idade = input("Digite a idade: ")
+                idade = int(input("Digite a idade: "))
 
                 return cls(
                     nome = nome,
