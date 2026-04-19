@@ -121,3 +121,28 @@ def cadastrar_emprestimo(usuario, livro):
         except ValueError as erro:
             print(f"Erro: {erro}")
             print("Digite valores válidos.")
+
+def menu():
+    pessoas = []
+    usuarios = []
+    funcionarios = []
+    livros = []
+
+    while True:
+        print("\n=== MENU ===")
+        print("1 - Cadastrar Pessoa")
+        print("2 - Cadastrar Usuário")
+        print("3 - Cadastrar Funcionário")
+        print("4 - Cadastrar Livro")
+        print("0 - Sair")
+
+        opcao = input("Escolha uma opção: ")
+
+        match opcao:
+            case "1":
+                pessoa = cadastrar_pessoa()
+                pessoas.append(pessoa)
+                print("Pessoa cadastrada!")
+
+            case "0":
+                break
