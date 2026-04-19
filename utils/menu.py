@@ -1,123 +1,52 @@
 from datetime import datetime
-
 from models.pessoa import Pessoa
 from models.livro import Livro
 from models.usuario import Usuario
 from models.funcionario import Funcionario
 from models.emprestimo import Emprestimo
-
-
-def cadastrar_pessoa():
-    nome = input("Digite um nome: ")
-
-    while True:
-        try:
-            idade = int(input("Digite a idade: "))
-            cpf = str (input("Digite o CPF: "))
-
-            return Pessoa(
-                nome=nome,
-                idade=idade,
-                cpf=cpf
-            )
-
-        except ValueError as error:
-            print(f"Erro: {error}")
-            print("Digite valores válidos")
-
-
-def cadastrar_livro():
-    titulo = input("Digite o título: ")
-    autor = input("Digite o autor: ")
+from utils.cadastros import cadastrar_pessoa, cadastrar_usuario, cadastrar_funcionario, cadastrar_livro
+## Menu de opções##
+def menu():
+    pessoas = []
+    usuarios = []
+    funcionarios = []
+    livros = []
+    emprestimos = []
 
     while True:
-        try:
-            quantidade_total = int(input("Digite a quantidade total: "))
-            quantidade_disponivel = int(input("Digite a quantidade disponível: "))
+        print("\n=== MENU ===")
+        print("1 - Cadastrar Pessoa")
+        print("2 - Cadastrar Usuário")
+        print("3 - Cadastrar Funcionário")
+        print("4 - Cadastrar Livro")
+        print("0 - Sair")
 
-            return Livro(
-                titulo=titulo,
-                autor=autor,
-                quantidade_total=quantidade_total,
-                quantidade_disponivel=quantidade_disponivel
-            )
+        opcao = input("Escolha uma opção: ")
 
-        except ValueError as erro:
-            print(f"Erro: {erro}")
-            print("Digite valores válidos.")
+        match opcao:
+            case "1":
+                pessoa = cadastrar_pessoa()
+                pessoas.append(pessoa)
+                print("Pessoa cadastrada!")
 
+            case "2":
+                usuario = cadastrar_usuario()
+                usuarios.append(usuario)
+                print("Usuário cadastrado!")
 
-def cadastrar_usuario():
-    while True:
-        try:
-            nome = input("Digite o nome: ")
-            idade = int(input("Digite a idade: "))
-            cpf = input("Digite o CPF: ")
-            identidade_leitor = int(input("Digite a identidade do leitor: "))
+            case "3":
+                funcionario = cadastrar_funcionario()
+                funcionarios.append(funcionario)
+                print("Funcionário cadastrado!")
 
-            return Usuario(
-                nome=nome,
-                idade=idade,
-                cpf=cpf,
-                identidade_leitor=identidade_leitor
-            )
+            case "4":
+                livro = cadastrar_livro()
+                livros.append(livro)
+                print("Livro cadastrado!")
 
-        except ValueError as erro:
-            print(f"Erro: {erro}")
-            print("Digite valores válidos.")
+            case "0":
+                print("Saindo...")
+                break
 
-
-def cadastrar_funcionario():
-    while True:
-        try:
-            nome = input("Digite o nome: ")
-            idade = int(input("Digite a idade: "))
-            cpf = input("Digite o CPF: ")
-            cargo = input("Digite o cargo: ")
-            salario = float(input("Digite o salário: "))
-
-            data_texto = input("Digite a data de admissão (AAAA-MM-DD): ")
-            data_admissao = datetime.strptime(data_texto, "%Y-%m-%d").date()
-
-            return Funcionario(
-                nome=nome,
-                idade=idade,
-                cpf=cpf,
-                cargo=cargo,
-                salario=salario,
-                data_admissao=data_admissao
-            )
-
-        except ValueError as erro:
-            print(f"Erro: {erro}")
-            print("Digite valores válidos.")
-
-
-def cadastrar_emprestimo(usuario, livro):
-    while True:
-        try:
-            data_texto = input("Digite a data do empréstimo (AAAA-MM-DD): ")
-            data_emprestimo = datetime.strptime(data_texto, "%Y-%m-%d").date()
-
-            data_devolucao_texto = input(
-                "Digite a data de devolução (AAAA-MM-DD) ou deixe vazio: "
-            )
-
-            if data_devolucao_texto.strip() == "":
-                data_devolucao = None
-            else:
-                data_devolucao = datetime.strptime(
-                    data_devolucao_texto,
-                    "%Y-%m-%d"
-                ).date()
-
-            return Emprestimo(
-                usuario=usuario,
-                livro=livro,
-                data_emprestimo=data_emprestimo,
-                data_devolucao=data_devolucao
-            )
-
-        except ValueError as erro:
-            print(f"Erro: {erro}")
-            print("Digite valores válidos.")
+            case _:
+                print("Opção inválida!")
