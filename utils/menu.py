@@ -1,5 +1,4 @@
 from datetime import datetime
-
 from models.pessoa import Pessoa
 from models.livro import Livro
 from models.usuario import Usuario

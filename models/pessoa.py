@@ -27,5 +27,3 @@ class Pessoa:
             except ValueError as error:
                 print(f"Error:{error}")
                 print("Digite valores válidos")
-
-pessoa1 = Pessoa.cadastrar_pessoa()

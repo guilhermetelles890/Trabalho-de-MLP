@@ -37,6 +37,3 @@ class Livro:
             except ValueError as erro:
                 print(f"Erro: {erro}")
                 print("Digite valores válidos.")
-    
-livro1 = Livro.cadastrar_livro()
-print(livro1)
