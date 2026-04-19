@@ -4,7 +4,7 @@ from models.livro import Livro
 from models.usuario import Usuario
 from models.funcionario import Funcionario
 from models.emprestimo import Emprestimo
-
+import os
 
 def cadastrar_pessoa():
     nome = input("Digite um nome: ")
@@ -128,39 +128,145 @@ def menu():
     livros = []
 
     while True:
-        print("\n=== MENU ===")
-        print("1 - Cadastrar Pessoa")
-        print("2 - Cadastrar Usuário")
-        print("3 - Cadastrar Funcionário")
-        print("4 - Cadastrar Livro")
+        print("\n================== Menu ==================")
+        print("1 - Cadastros no sistema")
+        print("2 - Listar relatorio")
         print("0 - Sair")
 
-        opcao = input("Escolha uma opção: ")
+        opcao1 = input("Escolha uma opção: ")
+        os.system("cls")
+        match opcao1:
 
-        match opcao:
             case "1":
-                pessoa = cadastrar_pessoa()
-                pessoas.append(pessoa)
-                print("Pessoa cadastrada!")
+                print("\n================== Cadastros ==================")
+                print("1 - Cadastrar Pessoa")
+                print("2 - Cadastrar Usuário")
+                print("3 - Cadastrar Funcionário")
+                print("4 - Cadastrar Livro")
+                print("0 - Sair")
+        
+                opcao2 = input("Escolha uma opção: ")
+                os.system("cls")
+                match opcao2:
 
+                    case "1":
+                        nova_pessoa = cadastrar_pessoa()
+
+                        for pessoa in pessoas:
+                            if (
+                                pessoa.nome == nova_pessoa.nome and
+                                pessoa.cpf == nova_pessoa.cpf
+                                ):
+                                print("Essa pessoa já foi cadastrado")
+                                os.system("pause")
+                                os.system("cls")
+                                break
+                        else:
+                            pessoas.append(nova_pessoa)
+                            print("Pessoa cadastrado!")
+                            os.system("pause")
+                            os.system("cls")
+
+                    case "2":
+                        novo_usuario = cadastrar_usuario()
+
+                        for usuario in usuarios:
+                            if (
+                                usuario.nome == novo_usuario.nome and
+                                usuario.cpf == novo_usuario.cpf
+                                ):
+                                print("Este usuario já foi cadastrado")
+                                os.system("pause")
+                                os.system("cls")
+                                break
+                        else:
+                            usuarios.append(novo_usuario)
+                            print("Usuario cadastrado!")
+                            os.system("pause")
+                            os.system("cls")
+
+                    case "3":
+                        novo_funcionario = cadastrar_funcionario()
+
+                        for funcionario in funcionarios:
+                            if (
+                                funcionario.nome == novo_funcionario.nome and
+                                funcionario.cpf == novo_funcionario.cpf
+                                ):
+                                print("Este funcionario já foi cadastrado")
+                                os.system("pause")
+                                os.system("cls")
+                                break
+                        else:
+                            funcionarios.append(novo_funcionario)
+                            print("Funcionario cadastrado!")
+                            os.system("pause")
+                            os.system("cls")
+
+                    case "4":
+                        novo_livro = cadastrar_livro()
+                 
+                        for livro in livros:
+                            if (
+                                livro.titulo == novo_livro.titulo and
+                                livro.autor == novo_livro.autor
+                                ):
+                                print("Este livro já foi cadastrado")
+                                os.system("pause")
+                                os.system("cls")
+                                break
+                        else:
+                            livros.append(novo_livro)
+                            print("Livro cadastrado!")
+                            os.system("pause")
+                            os.system("cls")     
+
+                    case "0":
+                        print("Saindo de Cadastros...")
+                        os.system("pause")
+                        os.system("cls")
+            
+                    case _:
+                        print("Opção inválida! Tente novamente.")
+                        os.system("pause")
+                        os.system("cls")
+        
             case "2":
-                usuario = cadastrar_usuario()
-                usuarios.append(usuario)
-                print("Usuário cadastrado!")
-
-            case "3":
-                funcionario = cadastrar_funcionario()
-                funcionarios.append(funcionario)
-                print("Funcionário cadastrado!")
-
-            case "4":
-                livro = cadastrar_livro()
-                livros.append(livro)
-                print("Livro cadastrado!")
-
+                print("\n================== Relatórios ==================")
+                print("1 - Listar Pessoa")
+                print("2 - Listar Usuário")
+                print("3 - Listar Funcionário")
+                print("4 - Listar Livro")
+                print("0 - Sair")
+        
+                opcao3 = input("Escolha uma opção: ")
+                os.system("cls")
+                match opcao3:
+                
+                    case "1":
+                        print(pessoas)
+                        os.system("pause")
+                        os.system("cls")
+                    case "2":
+                        print(usuarios)
+                        os.system("pause")
+                        os.system("cls")
+                    case "3":
+                        print(funcionarios)
+                        os.system("pause")
+                        os.system("cls")
+                    case "4":
+                        print(livros)
+                        os.system("pause")
+                        os.system("cls")
+                    case "0":
+                        print("Saindo de Relatórios...")
+                        os.system("pause")
+                        os.system("cls")
+        
+        
+        
             case "0":
                 print("Saindo do sistema...")
+                os.system("cls")
                 break
-            
-            case _:
-                print("Opção inválida! Tente novamente.")
