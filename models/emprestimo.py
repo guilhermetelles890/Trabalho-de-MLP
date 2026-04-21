@@ -12,3 +12,6 @@ class Emprestimo:
 
     def esta_ativo(self) -> bool:
         return self.data_devolucao is None
+    
+    def __repr__(self):
+        return f" Usuario: {self.usuario.nome}\nLivro: {self.livro.titulo} | Autor: {self.livro.autor}\n\n"

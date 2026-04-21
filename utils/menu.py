@@ -64,6 +64,8 @@ def cadastrar_usuario():
         except ValueError as erro:
             print(f"Erro: {erro}")
             print("Digite valores válidos.")
+            os.system("pause")
+            os.system("cls")
 
 
 def cadastrar_funcionario():
@@ -95,9 +97,9 @@ def cadastrar_funcionario():
 def cadastrar_emprestimo(usuario, livro):
     while True:
         try:
-            data_texto = input("Digite a data do empréstimo (AAAA-MM-DD): ")
+            data_texto = input("\nDigite a data do empréstimo (AAAA-MM-DD): ")
             data_emprestimo = datetime.strptime(data_texto, "%Y-%m-%d").date()
-
+            print("\n\n")
             data_devolucao_texto = input(
                 "Digite a data de devolução (AAAA-MM-DD) ou deixe vazio: "
             )
@@ -244,7 +246,13 @@ def menu():
                             print("Opção inválida. Tente novamente.")
                             os.system("pause")
                             os.system("cls")
+                        elif usuarios[usuario_index].emprestimos_ativos >= usuarios[usuario_index].limite_emprestimos:
+                            print("Limite de emprestimo atingido para este usuario")
+                            os.system("pause")
+                            os.system("cls")
                             continue
+                        os.system("pause")
+                        os.system("cls")
 
                         usuario_selecionado = usuarios[usuario_index]
                         print("Livros disponíveis:")
@@ -256,13 +264,25 @@ def menu():
                             os.system("pause")
                             os.system("cls")
                             continue
+                        os.system("pause")
+                        os.system("cls")
                         
                         livro_selecionado = livros[livro_index]
-                        novo_emprestimo = cadastrar_emprestimo(usuario_selecionado, livro_selecionado)
-                        Emprestimos.append(novo_emprestimo)
-                        print("Empréstimo cadastrado!")
-                        os.system("pause")
-                        os.system("cls")    
+
+                        if livro_selecionado.quantidade_disponivel > 0:
+                            novo_emprestimo = cadastrar_emprestimo(usuario_selecionado, livro_selecionado)
+                            Emprestimos.append(novo_emprestimo)
+                            livro_selecionado.quantidade_disponivel -= 1
+                            usuario_selecionado.emprestimos_ativos += 1
+                            print("Empréstimo cadastrado!")
+                            os.system("pause")
+                            os.system("cls")  
+                        else:
+                            print("Livro esgotado!")
+                            os.system("pause")
+                            os.system("cls")
+                        
+                          
 
                     
                     case "0":
@@ -281,6 +301,7 @@ def menu():
                 print("2 - Listar Usuário")
                 print("3 - Listar Funcionário")
                 print("4 - Listar Livro")
+                print("5 - Listar Emprestimos")
                 print("0 - Sair")
         
                 opcao3 = input("Escolha uma opção: ")
@@ -288,19 +309,28 @@ def menu():
                 match opcao3:
                 
                     case "1":
-                        print(pessoas)
+                        for i, pessoa in enumerate(pessoas):
+                            print(f"Pessoa - {i + 1}\nPessoa: {pessoa.nome}\nIdade: {pessoa.idade}\nCPF: {pessoa.cpf}\n\n")
                         os.system("pause")
                         os.system("cls")
                     case "2":
-                        print(usuarios)
+                        for i, usuario in enumerate(usuarios):
+                            print(f"Usuario - {i + 1}\nUsuario: {usuario.nome}\nIdade: {usuario.idade}\nCPF: {usuario.cpf}\nID leitor: {usuario.identidade_leitor}\nLimite Emprestimo Leitor: {usuario.limite_emprestimos}\nEmprestimos Ativos: {usuario.emprestimos_ativos}\n")
                         os.system("pause")
                         os.system("cls")
                     case "3":
-                        print(funcionarios)
+                        for i, funcionario in enumerate(funcionarios):
+                            print(f"Funcionario - {i + 1}\nNome: {funcionario.nome}\nIdade: {funcionario.idade}\nCPF: {funcionario.cpf}\nCargo: {funcionario.cargo}\nSalario: {funcionario.salario}\nData admissao: {funcionario.data_admissao}\n\n")
                         os.system("pause")
                         os.system("cls")
                     case "4":
-                        print(livros)
+                        for i, livro in enumerate(livros):
+                            print(f"Livro - {i + 1}\nNome: {livro.titulo}\nAutor: {livro.autor}\nQuantidade Total: {livro.quantidade_total}\nQuantidade Disponivel: {livro.quantidade_disponivel}\n\n")
+                        os.system("pause")
+                        os.system("cls")
+                    case "5":
+                        for i, Emprestimo in enumerate(Emprestimos):
+                            print(f"Emprestimo - {i + 1}\nUsuario: {Emprestimo.usuario.nome}\nLivro: {Emprestimo.livro.titulo}\nData Emprestimo: {Emprestimo.data_emprestimo}\nData Devolucao: {Emprestimo.data_devolucao}\n\n")
                         os.system("pause")
                         os.system("cls")
                     case "0":
